@@ -14,7 +14,6 @@ socket.emit('set username', username);
 function addMessage({ name, message }) {
   const item = document.createElement('li');
 
-  // 🔔 System message like "joined the chat"
   if (name === 'System') {
     item.classList.add('system-message');
     const bubble = document.createElement('div');
@@ -26,30 +25,37 @@ function addMessage({ name, message }) {
     return;
   }
 
-  // 💬 Normal chat message
   const isSelf = name === username;
   item.classList.add(isSelf ? 'message-right' : 'message-left');
 
   const avatar = document.createElement('div');
   avatar.classList.add('avatar');
 
+  const nameLabel = document.createElement('div');
+  nameLabel.classList.add('username-label');
+  nameLabel.innerText = name;
+
   const bubble = document.createElement('div');
   bubble.classList.add('message-bubble');
   bubble.innerText = message;
 
+  const messageContent = document.createElement('div');
+  messageContent.classList.add('message-content');
+  messageContent.appendChild(nameLabel);
+  messageContent.appendChild(bubble);
+
   if (isSelf) {
-    item.appendChild(bubble);
+    item.appendChild(messageContent);
     item.appendChild(avatar);
   } else {
     item.appendChild(avatar);
-    item.appendChild(bubble);
+    item.appendChild(messageContent);
   }
 
   messages.appendChild(item);
   messages.scrollTop = messages.scrollHeight;
 }
 
-// 🧾 Show past messages when joining
 socket.on('chat history', (history) => {
   history.forEach(addMessage);
 });
