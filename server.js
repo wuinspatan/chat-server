@@ -8,11 +8,10 @@ const io = new Server(server);
 
 app.use(express.static('public'));
 
-// 🧠 Store messages in memory
 const chatHistory = [];
 
 io.on('connection', (socket) => {
-  // Send full chat history to new user
+
   socket.emit('chat history', chatHistory);
 
   socket.on('set username', (username) => {
@@ -24,7 +23,7 @@ io.on('connection', (socket) => {
       message: `${username} joined the chat`
     };
 
-    chatHistory.push(systemMessage); // Save join message
+    chatHistory.push(systemMessage); 
     io.emit('chat message', systemMessage);
   });
 
@@ -41,7 +40,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = 8000;
-server.listen(PORT, () => {
+const PORT = 3000;
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
