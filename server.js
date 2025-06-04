@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
   });
 });
 
-const PORT = 8000;
-server.listen(PORT, () => {
+const PORT = 3000;
+server.listen(PORT, '0.0.0.0', () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });
