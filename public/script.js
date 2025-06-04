@@ -10,7 +10,6 @@ while (!username) {
 
 socket.emit('set username', username);
 
-// 💬 Add single message to DOM
 function addMessage({ name, message }) {
   const item = document.createElement('li');
 
