@@ -5,11 +5,12 @@ const messages = document.getElementById('messages');
 
 let username = '';
 while (!username) {
-  username = prompt('Enter your name:');
+  username = prompt('User name ? :');
 }
 
 socket.emit('set username', username);
 
+// AddMessage function :
 function addMessage({ name, message }) {
   const item = document.createElement('li');
 
@@ -55,9 +56,11 @@ function addMessage({ name, message }) {
   messages.scrollTop = messages.scrollHeight;
 }
 
+// Chat history
 socket.on('chat history', (history) => {
   history.forEach(addMessage);
 });
+
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
