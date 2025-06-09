@@ -5,7 +5,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div>
+  <div class="chat-container">
     <h2>Chat Room</h2>
     <ul id="messages"></ul>
     <form id="form" action="">
@@ -13,7 +13,11 @@
       <button>Send</button>
     </form>
   </div>
+
   <script src="/socket.io/socket.io.js"></script>
   <script src="script.js"></script> 
+  <audio id="sendSound" src="/public/mixkit-message-pop-alert-2354.mp3" preload="auto"></audio>
+  <audio id="receiveSound" src="/public/mixkit-sci-fi-confirmation-914.wav" preload="auto"></audio>
+
 </body>
 </html>

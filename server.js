@@ -11,7 +11,6 @@ app.use(express.static('public'));
 const chatHistory = [];
 
 io.on('connection', (socket) => {
-
   socket.emit('chat history', chatHistory);
 
   socket.on('set username', (username) => {
@@ -19,8 +18,9 @@ io.on('connection', (socket) => {
     console.log(`${username} connected`);
 
     const systemMessage = {
-      name: 'System',
-      message: `${username} joined the chat`
+    name: 'System',
+    message: `${username} joined the chat`,
+    time: Date.now()
     };
 
     chatHistory.push(systemMessage); 
@@ -29,9 +29,13 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     const sender = socket.username || 'Anonymous';
-    const chatMessage = { name: sender, message: msg };
-
-    chatHistory.push(chatMessage); // Save message
+    const chatMessage = {
+      name: sender,
+      message: msg,
+      time: Date.now()
+    };
+  
+    chatHistory.push(chatMessage);
     io.emit('chat message', chatMessage);
   });
 
