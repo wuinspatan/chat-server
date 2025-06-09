@@ -3,4 +3,5 @@ Go to directory and open terminal here
 ```sh
 node server.js
 ```
-Ctrl + Click -> localhost:3000 <-
+## Ctrl + Click
+[localhost:3000](localhost:3000)
